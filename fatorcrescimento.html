@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!--O primeiro passo será definir o tamanho inicial do raio em uma variável. 
+        Além disso, vamos definir uma variável chamada fatorCrescimento, que começará com 1. 
+        Esse fator de crescimento é importante, pois é ele que usaremos para incrementar o raio. 
+        Se for para a bolinha crescer, usamos um valor positivo, se for para diminuir, usamos um negativo.-->
+    
+        <canvas width="600" height="400"></canvas>
+
+        <script>
+        
+            var tela = document.querySelector('canvas');
+            var pincel = tela.getContext('2d');
+            pincel.fillStyle = 'lightgray';
+            pincel.fillRect(0, 0, 600, 400);
+        
+            function desenhaCirculo(x, y, raio, cor) {
+        
+                pincel.fillStyle = cor;
+                pincel.beginPath();
+                pincel.arc(x, y, raio, 0, 2 * Math.PI);
+                pincel.fill();
+            }
+        
+            function limpaTela() {
+        
+                pincel.clearRect(0, 0, 600, 400);
+            }
+        
+            var raio = 19;
+        
+            var fatorCrescimento = 0;
+        
+            function atualizaTela() {
+                 // limpamos sempre a tela para podermos desenhar um novo círculo
+                limpaTela();
+        
+                if(raio > 30) { // o raio tem que diminuir
+                    fatorCrescimento = -1;
+                } else if (raio < 20) { // o raio tem que aumentar
+                    fatorCrescimento = 1;
+                }
+        
+                raio = raio + fatorCrescimento;
+        
+                desenhaCirculo(300, 200, raio, 'blue');
+        
+            }
+        
+            setInterval(atualizaTela, 20); //Mas quem vai chamar nossa função atualizaTela? 
+            //A função setInterval do JavaScript, aliás, usaremos uma taxa de atualização de 20 milisegundos:
+        
+        </script>
+</body>
+</html>
